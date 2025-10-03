@@ -1,6 +1,5 @@
-Flask==3.0.2
-Flask-Cors==4.0.0
-protobuf==4.22.0
+Flask
+Flask-Cors
+protobuf==6.32.0
 pycryptodome==3.20.0
-httpx==0.27.0
-cachetools==5.3.3
+requests
