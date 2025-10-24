@@ -88,10 +88,6 @@ Responses are in JSON format. Example error messages are provided for invalid pa
 
 Refer to `requirements.txt` for additional dependencies.
 
-## License
-
-This project currently does not specify a license. Please contact the repository owner for details.
-
 ## Contributing
 
 Feel free to fork and submit pull requests. Open issues for bug reports and feature requests.
