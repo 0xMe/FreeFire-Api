@@ -1,0 +1,627 @@
+syntax = "proto3";
+
+package PlayerPersonalShow;
+
+enum CallSignSrcType {
+    None = 0;
+    Without = 1;
+    SearchChampionship = 2;
+    SearchCup = 3;
+    SearchFriend = 4;
+    SearchChummy = 5;
+    GameOver = 6;
+    PersonalShowView = 7;
+    PersonalShowEp = 8;
+    PersonalShowOwner = 9;
+    BriefInfo = 10;
+    FriendRecall = 11;
+    FriendPlatform = 12;
+    FriendRequest = 13;
+    FriendList = 14;
+    FriendNtf = 15;
+    FriendRecommend = 16;
+    FriendCdt = 17;
+    ClanRequest = 18;
+    ClanMembers = 19;
+    CupRequest = 20;
+    CupMembers = 21;
+    ChampionshipRequest = 22;
+    ChampionshipMembers = 23;
+    ChampionshipSeason = 24;
+    ChummyRequest = 25;
+    ChummyList = 26;
+    ChummyRecommendStudent = 27;
+    ChummyRecommendMentor = 28;
+    LeaderboardProfile = 29;
+    PoolLeaderboardProfile = 30;
+    RecentVisitors = 31;
+    LobbyPopupWindow = 32;
+    MatchmakingBlacklist = 33;
+    MatchmakingSocial = 34;
+    MatchSpectation = 35;
+    SocialTeamUpRecommend = 36;
+    ClanInviteStrangers = 37;
+    SendGiftNotify = 38;
+}
+
+message request {
+    uint64 accountId = 1;
+    CallSignSrcType callSignSrc = 2;
+    bool needGalleryInfo = 3;
+}
+
+enum EAttendanceVeteranLeaveDays {
+    VETERANLEAVEDAYSNONE = 0;
+    VETERANLEAVEDAYSSHORT = 1;
+    VETERANLEAVEDAYSNORMAL = 2;
+    VETERANLEAVEDAYSLONG = 3;
+    VETERANLEAVEDAYSVERYLONG = 4;
+}
+
+enum EAttendancePreVeteranActionType {
+    PREVETERANACTIONTYPENONE = 0;
+    PREVETERANACTIONTYPEACTIVITY = 1;
+    PREVETERANACTIONTYPEBUFF = 2;
+}
+
+enum EAccountExternalIconStatus {
+    EXTERNALICONSTATUSNONE = 0;
+    EXTERNALICONSTATUSNOTINUSE = 1;
+    EXTERNALICONSTATUSINUSE = 2;
+}
+
+enum EAccountExternalIconShowType {
+    EXTERNALICONSHOWTYPENONE = 0;
+    EXTERNALICONSHOWTYPEFRIEND = 1;
+    EXTERNALICONSHOWTYPEALL = 2;
+}
+
+enum ESocialHighLight {
+    HIGHLIGHTNONE = 0;
+    HIGHLIGHTBRWIN = 1;
+    HIGHLIGHTCSMVP = 2;
+    HIGHLIGHTBRSTREAKWIN = 3;
+    HIGHLIGHTCSSTREAKWIN = 4;
+    HIGHLIGHTCSRANKGROUPUPGRADE = 5;
+    HIGHLIGHTTEAMACE = 6;
+    HIGHLIGHTWEAPONPOWERTITLE = 7;
+    HIGHLIGHTBRRANKGROUPUPGRADE = 9;
+    HIGHLIGHTBRSTREAKWINEXECELLENT = 10;
+    HIGHLIGHTCSSTREAKWINEXECELLENT = 11;
+    HIGHLIGHTVETERAN = 12;
+    HIGHLIGHTRANKINGTITLE = 13;
+    HIGHLIGHTCSPEAKTITLE = 14;
+}
+
+enum BadgeType {
+    BADGETYPEUNSPECIFIED = 0;
+    BADGETYPEROLE = 1;
+    BADGETYPEPRIME = 2;
+}
+
+enum EPrimePrivilegeID {
+    PRIVILEGEIDNONE = 0;
+    PRIVILEGEIDBADGE = 1;
+    PRIVILEGEIDPROFILESKIN = 2;
+    PRIVILEGEIDPROFILEANI = 3;
+    PRIVILEGEIDINTERFACESKIN = 4;
+    PRIVILEGEIDSETSHARE = 5;
+    PRIVILEGEIDAVATARFRAME = 6;
+    PRIVILEGEIDNAMECOLOR = 7;
+    PRIVILEGEIDFESTIVAL = 8;
+    PRIVILEGEIDBIGSCREEN = 9;
+    PRIVILEGEIDMATCHMAKINGBLACKLIST = 10;
+    PRIVILEGEIDADDSET = 11;
+    PRIVILEGEIDADDFRIEND = 12;
+    PRIVILEGEIDEXCLUSIVESHOP = 13;
+    PRIVILEGEIDEXCLUSIVEGACHA = 14;
+    PRIVILEGEIDEMOTE = 15;
+    PRIVILEGEIDAVATARBANNER1 = 16;
+    PRIVILEGEIDAVATARBANNER2 = 17;
+    PRIVILEGEIDAVATARBANNER3 = 18;
+    PRIVILEGEIDGLOOWALL = 19;
+    PRIVILEGEIDPRIMELEADERBOARD = 20;
+    PRIVILEGEIDPROFILEBADGE = 21;
+}
+
+enum EProfileEquipSource {
+    EQUIPSOURCESELF = 0;
+    EQUIPSOURCECONFIDANTFRIEND = 1;
+}
+
+enum EProfileUnlockType {
+    UNLOCKTYPENONE = 0;
+    UNLOCKTYPELINK = 1;
+}
+
+enum ESocialGender {
+    GENDERNONE = 0;
+    GENDERMALE = 1;
+    GENDERFEMALE = 2;
+    GENDERUNLIMITED = 999;
+}
+
+enum ESocialLanguage {
+    LANGUAGENONE = 0;
+    LANGUAGEEN = 1;
+    LANGUAGECNSIMPLIFIED = 2;
+    LANGUAGECNTRADITIONAL = 3;
+    LANGUAGETHAI = 4;
+    LANGUAGEVIETNAMESE = 5;
+    LANGUAGEINDONESIAN = 6;
+    LANGUAGEPORTUGUESE = 7;
+    LANGUAGESPANISH = 8;
+    LANGUAGERUSSIAN = 9;
+    LANGUAGEKOREAN = 10;
+    LANGUAGEFRENCH = 11;
+    LANGUAGEGERMAN = 12;
+    LANGUAGETURKISH = 13;
+    LANGUAGEHINDI = 14;
+    LANGUAGEJAPANESE = 15;
+    LANGUAGEROMANIAN = 16;
+    LANGUAGEARABIC = 17;
+    LANGUAGEBURMESE = 18;
+    LANGUAGEURDU = 19;
+    LANGUAGEBENGALI = 20;
+    LANGUAGEMALAY = 21;
+    LANGUAGEUNLIMITED = 999;
+}
+
+enum ESocialTimeOnline {
+    TIMEONLINENONE = 0;
+    TIMEONLINEWORKDAY = 1;
+    TIMEONLINEWEEKEND = 2;
+    TIMEONLINEUNLIMITED = 999;
+}
+
+enum ESocialTimeActive {
+    TIMEACTIVENONE = 0;
+    TIMEACTIVEMORNING = 1;
+    TIMEACTIVEAFTERNOON = 2;
+    TIMEACTIVENIGHT = 3;
+    TIMEACTIVEUNLIMITED = 999;
+}
+
+enum ESocialPlayerBattleTagID {
+    PLAYERBATTLETAGIDNONE = 0;
+    PLAYERBATTLETAGIDDOMINATION = 1101;
+    PLAYERBATTLETAGIDUNCROWN = 1102;
+    PLAYERBATTLETAGIDBESTPARTNER = 1103;
+    PLAYERBATTLETAGIDSNIPER = 1104;
+    PLAYERBATTLETAGIDMELEE = 1105;
+    PLAYERBATTLETAGIDPEACEMAKER = 1106;
+    PLAYERBATTLETAGIDAMBUSH = 1107;
+    PLAYERBATTLETAGIDSHORTSTOP = 1108;
+    PLAYERBATTLETAGIDRAMPAGE = 1109;
+    PLAYERBATTLETAGIDLEADER = 1110;
+}
+
+enum ESocialSocialTag {
+    SOCIALTAGNONE = 0;
+    SOCIALTAGFASHION = 2101;
+    SOCIALTAGSOCIAL = 2102;
+    SOCIALTAGVETERAN = 2103;
+    SOCIALTAGNEWBIE = 2104;
+    SOCIALTAGPLAYFORWIN = 2105;
+    SOCIALTAGPLAYFORFUN = 2106;
+    SOCIALTAGVOICEON = 2107;
+    SOCIALTAGVOICEOFF = 2108;
+}
+
+enum ESocialModePrefer {
+    MODEPREFERNONE = 0;
+    MODEPREFERBR = 1;
+    MODEPREFERCS = 2;
+    MODEPREFERENTERTAINMENT = 3;
+    MODEPREFERUNLIMITED = 999;
+}
+
+enum ESocialRankShow {
+    RANKSHOWNONE = 0;
+    RANKSHOWBR = 1;
+    RANKSHOWCS = 2;
+    RANKSHOWUNLIMITED = 999;
+}
+
+enum ELeaderBoardTitleRegionType {
+    LEADERBOARDTITLEREGIONTYPENONE = 0;
+    LEADERBOARDTITLEREGIONTYPECOUNTRY = 1;
+    LEADERBOARDTITLEREGIONTYPEPROVINCE = 2;
+    LEADERBOARDTITLEREGIONTYPECITY = 3;
+    LEADERBOARDTITLEREGIONTYPEREGION = 4;
+}
+
+enum ELeaderBoardTitleType {
+    LEADERBOARDTITLETYPENONE = 0;
+    LEADERBOARDTITLETYPEWEAPONPOWERBR = 1;
+    LEADERBOARDTITLETYPEWEAPONPOWERCS = 2;
+    LEADERBOARDTITLETYPECLANWAR = 3;
+    LEADERBOARDTITLETYPERANKBR = 4;
+    LEADERBOARDTITLETYPERANKCS = 5;
+    LEADERBOARDTITLETYPEPEAKCS = 6;
+    LEADERBOARDTITLETYPEGRANDMASTERBR = 99;
+    LEADERBOARDTITLETYPEGRANDMASTERCS = 100;
+}
+
+enum ECreditScoreRewardState {
+    REWARDSTATEINVALID = 0;
+    REWARDSTATEUNCLAIMED = 1;
+    REWARDSTATECLAIMED = 2;
+}
+
+enum ECreditScoreSummaryLevel {
+    SUMMARYLEVELNOTINIT = 0;
+    SUMMARYLEVELA = 1;
+    SUMMARYLEVELB = 2;
+    SUMMARYLEVELC = 3;
+    SUMMARYLEVELD = 4;
+}
+
+message response {
+    AccountInfoBasic basicinfo = 1;
+    AvatarProfile profileinfo = 2;
+    int32 rankingleaderboardpos = 3;
+    repeated AccountNews news = 4;
+    repeated BasicEPInfo historyepinfo = 5;
+    ClanInfoBasic clanbasicinfo = 6;
+    AccountInfoBasic captainbasicinfo = 7;
+    PetInfo petinfo = 8;
+    SocialBasicInfo socialinfo = 9;
+    DiamondCostRes diamondcostres = 10;
+    CreditScoreInfoBasic creditscoreinfo = 11;
+    EAttendancePreVeteranActionType preveterantype = 12;
+    repeated AccountMMRInfo mmrlist = 13;
+    ModeStatsSummaryInfo modestatssummaryinfo = 14;
+}
+
+message AccountInfoBasic {
+    uint64 accountid = 1;
+    uint32 accounttype = 2;
+    string nickname = 3;
+    string externalid = 4;
+    string region = 5;
+    uint32 level = 6;
+    uint32 exp = 7;
+    uint32 externaltype = 8;
+    string externalname = 9;
+    string externalicon = 10;
+    uint32 bannerid = 11;
+    uint32 headpic = 12;
+    string clanname = 13;
+    uint32 rank = 14;
+    uint32 rankingpoints = 15;
+    uint32 role = 16;
+    bool haselitepass = 17;
+    uint32 badgecnt = 18;
+    uint32 badgeid = 19;
+    uint32 seasonid = 20;
+    uint32 liked = 21;
+    bool isdeleted = 22;
+    bool showrank = 23;
+    int64 lastloginat = 24;
+    uint64 externaluid = 25;
+    int64 returnat = 26;
+    string championshipteamname = 27;
+    uint32 championshipteammembernum = 28;
+    uint64 championshipteamid = 29;
+    uint32 csrank = 30;
+    uint32 csrankingpoints = 31;
+    repeated uint32 weaponskinshows = 32;
+    uint32 pinid = 33;
+    bool iscsrankingban = 34;
+    uint32 maxrank = 35;
+    uint32 csmaxrank = 36;
+    uint32 maxrankingpoints = 37;
+    uint32 gamebagshow = 38;
+    uint32 peakrankpos = 39;
+    uint32 cspeakrankpos = 40;
+    AccountPrefers accountprefers = 41;
+    uint32 periodicrankingpoints = 42;
+    uint32 periodicrank = 43;
+    int64 createat = 44;
+    EAttendanceVeteranLeaveDays veteranleavedaystag = 45;
+    repeated uint32 selecteditemslots = 46;
+    EAttendancePreVeteranActionType preveterantype = 47;
+    uint32 title = 48;
+    ExternalIconInfo externaliconinfo = 49;
+    string releaseversion = 50;
+    uint64 veteranexpiretime = 51;
+    bool showbrrank = 52;
+    bool showcsrank = 53;
+    uint64 clanid = 54;
+    uint32 clanbadgeid = 55;
+    string customclanbadge = 56;
+    bool usecustomclanbadge = 57;
+    uint32 clanframeid = 58;
+    bool membershipstate = 59;
+    repeated OccupationSeasonInfo selectoccupations = 60;
+    SocialHighLightsWithSocialBasicInfo socialhighlightswithbasicinfo = 61;
+    repeated AbTestChoice abtestchoices = 62;
+    repeated ItemTagInfo itemtaginfo = 63;
+    uint32 ranksort = 64;
+    uint32 csranksort = 65;
+    uint32 hipporank = 66;
+    uint32 hipporankingpoints = 67;
+    uint32 hippomaxrank = 68;
+    bool showhipporank = 69;
+    uint32 hippototalprofit = 70;
+    uint32 hippototalworth = 71;
+    repeated ModeStatsInfo modestatsinfos = 72;
+    BadgeInfo badgeinfo = 73;
+    PrimePrivilegeDetail primeprivilegedetail = 74;
+    uint32 cspeakpoints = 75;
+    bool displaycspeakpoint = 76;
+    uint32 cspeaktournamentrankpos = 77;
+    uint32 avatarframe = 78;
+}
+
+message AccountPrefers {
+    bool hidemylobby = 1;
+    repeated uint32 pregameshowchoices = 2;
+    repeated uint32 brpregameshowchoices = 3;
+    bool hidepersonalinfo = 4;
+    bool disablefriendspectate = 5;
+    bool hideoccupation = 6;
+}
+
+message ExternalIconInfo {
+    string externalicon = 1;
+    EAccountExternalIconStatus status = 2;
+    EAccountExternalIconShowType showtype = 3;
+}
+
+message OccupationSeasonInfo {
+    uint32 seasonid = 1;
+    uint32 gamemode = 2;
+    OccupationInfo info = 3;
+    uint32 matchmode = 4;
+    uint32 extendval = 5;
+}
+
+message OccupationInfo {
+    uint32 occupationid = 1;
+    uint64 scores = 2;
+    uint64 proficients = 3;
+    uint32 proficientlv = 4;
+    bool isselect = 5;
+}
+
+message SocialHighLightsWithSocialBasicInfo {
+    repeated SocialHighLight socialhighlights = 1;
+    SocialBasicInfo socialbasicinfo = 2;
+}
+
+message SocialHighLight {
+    ESocialHighLight highlight = 1;
+    int64 expireat = 2;
+    uint32 value = 3;
+}
+
+message AbTestChoice {
+    uint32 type = 1;
+    uint32 val = 2;
+}
+
+message ItemTagInfo {
+    uint32 itemid = 1;
+    uint32 seriesid = 2;
+    uint32 numid = 3;
+}
+
+message ModeStatsInfo {
+    uint32 gamemode = 1;
+    uint32 score = 2;
+}
+
+message BadgeInfo {
+    BadgeType badgetype = 1;
+    uint32 subtype = 2;
+}
+
+message PrimePrivilegeDetail {
+    uint64 accountid = 1;
+    uint32 primelevel = 2;
+    repeated EPrimePrivilegeID privilegeidlist = 3;
+    int32 monthlypoints = 4;
+    int32 annuallypoints = 5;
+    int32 sumpoints = 6;
+    uint32 shareeremaintimes = 7;
+}
+
+
+message AvatarProfile {
+    optional uint32 avatarid = 1;
+    optional uint32 skincolor = 2;
+    repeated uint32 clothes = 3;
+    repeated uint32 equipedskills = 4; // this Should be but not [repeated AvatarSkillSlot equipedskills = 4;]
+    optional bool isselected = 5;
+    optional uint32 pveprimaryweapon = 6;
+    optional bool isselectedawaken = 7;
+    optional uint32 endtime = 8;
+    optional EProfileUnlockType unlocktype = 9;
+    optional uint32 unlocktime = 10;
+    optional bool ismarkedstar = 11;
+    repeated uint32 clothestailoreffects = 12;
+    repeated ItemTagInfo itemtaginfo = 13;
+}
+
+
+message AvatarSkillSlot {
+    uint32 slotid = 1;
+    uint32 skillid = 2;
+    EProfileEquipSource equipsource = 3;
+}
+
+enum EAccountNewsType {
+    NEWSTYPENONE = 0;
+    NEWSTYPERANK = 1;
+    NEWSTYPELOTTERY = 2;
+    NEWSTYPEPURCHASE = 3;
+    NEWSTYPETREASUREBOX = 4;
+    NEWSTYPEELITEPASS = 5;
+    NEWSTYPEEXCHANGESTORE = 6;
+    NEWSTYPEBUNDLE = 7;
+    NEWSTYPELOTTERYSPECIALEXCHANGE = 8;
+    NEWSTYPEOTHERS = 9;
+}
+
+message AccountNews {
+    EAccountNewsType type = 1;
+    AccountNewsContent content = 2;
+    int64 updatetime = 3;
+}
+
+message AccountNewsContent {
+    repeated uint32 itemids = 1;
+    uint32 rank = 2;
+    uint32 matchmode = 3;
+    uint32 mapid = 4;
+    uint32 gamemode = 5;
+    uint32 groupmode = 6;
+    uint32 treasureboxid = 7;
+    uint32 commodityid = 8;
+    uint32 storeid = 9;
+}
+
+message BasicEPInfo {
+    uint32 epeventid = 1;
+    bool ownedpass = 2;
+    uint32 epbadge = 3;
+    uint32 badgecnt = 4;
+    string bpicon = 5;
+    uint32 maxlevel = 6;
+    string eventname = 7;
+}
+
+message ClanInfoBasic {
+    uint64 clanid = 1;
+    string clanname = 2;
+    uint64 captainid = 3;
+    uint32 clanlevel = 4;
+    uint32 capacity = 5;
+    uint32 membernum = 6;
+    uint32 honorpoint = 7;
+}
+
+message PetInfo {
+    uint32 id = 1;
+    string name = 2;
+    uint32 level = 3;
+    uint32 exp = 4;
+    bool isselected = 5;
+    uint32 skinid = 6;
+    repeated uint32 actions = 7;
+    repeated PetSkillInfo skills = 8;
+    uint32 selectedskillid = 9;
+    bool ismarkedstar = 10;
+    uint32 endtime = 11;
+}
+
+message PetSkillInfo {
+    uint32 petid = 1;
+    uint32 skillid = 2;
+    uint32 skilllevel = 3;
+}
+
+message SocialBasicInfo {
+    uint64 accountid = 1;
+    ESocialGender gender = 2;
+    ESocialLanguage language = 3;
+    ESocialTimeOnline timeonline = 4;
+    ESocialTimeActive timeactive = 5;
+    repeated ESocialPlayerBattleTagID battletag = 6;
+    repeated ESocialSocialTag socialtag = 7;
+    ESocialModePrefer modeprefer = 8;
+    string signature = 9;
+    ESocialRankShow rankshow = 10;
+    repeated uint32 battletagcount = 11;
+    int64 signaturebanexpiretime = 12;
+    LeaderboardTitleInfo leaderboardtitles = 13;
+}
+
+message LeaderboardTitleInfo {
+    repeated WeaponPowerTitleInfo weaponpowertitleinfo = 1;
+    repeated GuildWarTitleInfo guildwartitleinfo = 2;
+    repeated RankingTitleInfo rankingtitleinfo = 3;
+    bool titlefirstreceive = 4;
+    repeated CSPeakTitleInfo cspeaktitleinfo = 5;
+    bool peaktitlefirstreceive = 6;
+}
+
+message WeaponPowerTitleInfo {
+    string region = 1;
+    uint32 titlecfgid = 2;
+    uint64 leaderboardid = 3;
+    uint32 weaponid = 4;
+    uint32 rank = 5;
+    int64 expiretime = 6;
+    int64 rewardtime = 7;
+    string regionname = 8;
+    ELeaderBoardTitleRegionType regiontype = 9;
+    bool isbr = 10;
+    ELeaderBoardTitleType titletype = 11;
+}
+
+message GuildWarTitleInfo {
+    string region = 1;
+    uint64 clanid = 2;
+    uint32 titlecfgid = 3;
+    uint64 leaderboardid = 4;
+    uint32 rank = 5;
+    int64 expiretime = 6;
+    int64 rewardtime = 7;
+    bool isequipped = 8;
+    string clanname = 9;
+}
+
+message RankingTitleInfo {
+    string region = 1;
+    uint32 titlecfgid = 2;
+    uint64 leaderboardid = 3;
+    uint32 rank = 4;
+    int64 expiretime = 5;
+    int64 rewardtime = 6;
+    string regionname = 7;
+    ELeaderBoardTitleRegionType regiontype = 8;
+    bool isbr = 9;
+}
+
+message CSPeakTitleInfo {
+    string region = 1;
+    uint32 titlecfgid = 2;
+    uint64 leaderboardid = 3;
+    uint32 rank = 4;
+    int64 expiretime = 5;
+    int64 rewardtime = 6;
+    string regionname = 7;
+    bool isbr = 8;
+    ELeaderBoardTitleRegionType regiontype = 9;
+}
+
+message DiamondCostRes {
+    uint32 diamondcost = 1;
+}
+
+message CreditScoreInfoBasic {
+    uint32 creditscore = 1;
+    bool isinit = 2;
+    ECreditScoreRewardState rewardstate = 3;
+    uint32 periodicsummarylikecnt = 4;
+    uint32 periodicsummaryillegalcnt = 5;
+    uint32 weeklymatchcnt = 6;
+    int64 periodicsummarystarttime = 7;
+    int64 periodicsummaryendtime = 8;
+    ECreditScoreSummaryLevel periodicsummarylevel = 9;
+}
+
+message AccountMMRInfo {
+    uint32 gamemode = 1;
+    uint32 mmr = 2;
+    uint32 botpoint = 3;
+    uint32 streakwins = 4;
+}
+
+message ModeStatsSummaryInfo {
+    uint32 reachedheroiccnt = 1;
+    uint32 maxscore = 2;
+}

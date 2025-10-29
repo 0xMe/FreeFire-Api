@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package SetPlayerGalleryShowInfo;
+
+message request {
+    uint32 version = 1;
+    repeated GalleryShowInfo info_item = 2;
+}
+
+message request_single {
+    uint32 version = 1;
+    GalleryShowInfo info_item = 2;
+}
+
+message GalleryShowInfo {
+    GalleryShow_InfoType info_type = 1;
+    repeated GalleryShowInfoItem items = 2;
+}
+
+enum GalleryShow_InfoType {
+    InfoType_NONE = 0;
+    InfoType_ITEM = 1;
+    InfoType_BATTLEPASS = 2;
+    InfoType_ACHIEVEMENT = 3;
+    InfoType_WEAPONEXP = 4;
+    InfoType_SIGNATURE = 5;
+    InfoType_BUDDYINFO = 6;
+    InfoType_RANKINGSTATS = 7;
+    InfoType_LEADERBOARDTITLE = 8;
+    InfoType_CLANINFO = 9;
+    InfoType_CLANHISOTRYLEADERBOARD = 10;
+    InfoType_ACHIEVEMENT_STATS = 11;
+    InfoType_BADGE = 12;
+}
+
+message GalleryShowInfoItem {
+    uint32 type = 1;
+    uint32 sub_type = 2;
+    bool is_extra = 3;
+    uint32 position_x = 4;
+    uint32 position_y = 5;
+    GalleryShowExtraInfo extra_info = 6;
+}
+
+message GalleryShowExtraInfo {
+    string region = 1;
+    uint32 level = 2;
+    uint32 rank = 3;
+    uint32 max_level = 4;
+    uint64 friend_id = 5;
+    uint32 item_id = 6;
+    uint32 item_extra_id = 7;
+    uint32 value = 8;
+    string key = 9;
+    int64 expire_time = 10;
+    uint64 leaderboard_id = 11;
+    uint32 weapon_id = 12;
+    uint32 title_cfg_id = 13;
+    uint64 clan_id = 14;
+    int64 create_time = 15;
+    uint32 series_id = 16;
+    uint32 num_id = 17;
+    string clan_name = 18;
+    uint32 clan_level = 19;
+    uint32 clan_frame_id = 20;
+    uint32 clan_badge_id = 21;
+    bool clan_use_custom_badge = 22;
+    string clan_custom_badge = 23;
+    uint32 clan_glory_num = 24;
+}

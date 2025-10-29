@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package SearchAccountByName;
+
+import "PlayerPersonalShow.proto";
+
+message request {
+    string keyword = 1;
+}
+
+message response {
+    repeated PlayerPersonalShow.AccountInfoBasic infos = 1;
+}

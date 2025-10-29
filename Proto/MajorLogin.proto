@@ -1,0 +1,173 @@
+syntax = "proto3";
+
+package MajorLogin;
+
+message request {
+    uint64 accountid = 1;
+    string gameserverid = 2;
+    string eventtime = 3;
+    string gameid = 4;
+    uint32 platid = 5;
+    uint32 zoneareaid = 6;
+    string clientversion = 7;
+    string systemsoftware = 8;
+    string systemhardware = 9;
+    string telecomoper = 10;
+    string network = 11;
+    uint32 screenwidth = 12;
+    uint32 screenhight = 13;
+    string dpi = 14;
+    string cpuhardware = 15;
+    uint32 memory = 16;
+    string glrender = 17;
+    string glversion = 18;
+    string deviceid = 19;
+    string clientip = 20;
+    string language = 21;
+    string openid = 22;
+    string openidtype = 23;
+    string devicetype = 24;
+    string devicemodel = 25;
+    string region = 26;
+    string ipregion = 27;
+    string others = 28;
+    string logintoken = 29;
+    uint32 platformsdkid = 30;
+    uint32 level = 31;
+    uint64 clanid = 32;
+    uint64 platformuid = 33;
+    string nickname = 34;
+    string networkoperatora = 35;
+    string networktypea = 36;
+    string line1numa = 37;
+    bool isemulator = 38;
+    string ipaddress = 39;
+    string signaturemd5 = 40;
+    uint32 emulatorscore = 41;
+    int32 sdcardtotalstorage = 42;
+    int32 sdcardavailstorage = 43;
+    int32 innertotalstorage = 44;
+    int32 inneravailstorage = 45;
+    int32 gameinstalleddiskavailstorage = 46;
+    int32 gameinstalleddisktotalstorage = 47;
+    int32 externalsdcardavailstorage = 48;
+    int32 externalsdcardtotalstorage = 49;
+    uint32 loginby = 50;
+    string notiregion = 51;
+    AccountDownloadType source = 52;
+    uint32 regavatar = 53;
+    uint32 lockregiontime = 54;
+    uint32 quality = 55;
+    string libpath = 56;
+    AuthClientUsingVersion usingversion = 57;
+    string libtoken = 58;
+    uint32 channeltype = 59;
+    uint32 cputype = 60;
+    string cpuarchitecture = 61;
+    string clientversioncode = 62;
+    int64 tokenexpiresat = 63;
+    AccountNewbieChoice newbiechoice = 64;
+    string systemgraphicsapi = 65;
+    uint32 supportedastcbitset = 66;
+    uint32 loginopenidtype = 67;
+    string ipcity = 68;
+    string ipsubdivision = 69;
+    uint32 loadingtime = 70;
+    string releasechannel = 71;
+    bytes gindetail = 72;
+    uint32 androidengineinitflag = 73;
+    string extrainfo = 74;
+    bool ifpush = 75;
+    bool isvpn = 76;
+    string orignplatformtype = 77;
+    string primaryplatformtype = 78;
+    string clientreportip = 79;
+    bytes ffantidetail = 80;
+    string armtype = 81;
+    uint64 buildNumber = 83;
+    string graphicsApi = 86;
+    uint32 graphicsFlags = 87;
+    uint32 graphicsLevel = 88;
+    uint32 performanceScore = 92;
+    string profileName = 93;
+    string secureToken = 94;
+    uint32 sessionId = 95;
+    string refreshRates = 96;
+    uint32 featureFlag = 98;
+    string platform = 99;
+    string mainactiveplatform = 100;
+    
+}
+
+message response {
+    uint64 accountId = 1;
+    string lockRegion = 2;
+    string notiRegion = 3;
+    string ipRegion = 4;
+    string agoraEnvironment = 5;
+    string newActiveRegion = 6;
+    repeated string recommendRegions = 7;
+    string token = 8;
+    uint32 ttl = 9;
+    string serverUrl = 10;
+    uint32 emulatorScore = 11;
+    BlacklistInfoRes blacklist = 12;
+    LoginQueueInfo queueInfo = 13;
+    string tpUrl = 14;
+    uint32 appServerId = 15;
+    string ipCity = 16;
+    string ipSubdivision = 17;
+    uint32 kts = 18;
+    bytes ak = 19;
+    bytes aiv = 20;
+    string ffantiUrl = 21;
+}
+
+
+enum AccountDownloadType {
+    AccountDownloadTypeNONE = 0;
+    INSTANTGAME = 1;
+    IOS = 2;
+    HUAWEI = 3;
+    XIAOMI = 4;
+    SAMSUNG = 5;
+}
+
+enum AuthClientUsingVersion {
+    AuthClientUsingVersionNONE = 0;
+    NORMAL = 1;
+    MAX = 2;
+    FFI = 3;
+    MAXHPE = 4;
+}
+
+enum AccountNewbieChoice {
+    AccountNewbieChoiceNONE = 0;
+    NEWPLAYER = 1;
+    FPSPLAYER = 2;
+    VETERAN = 3;
+    NEEDMOREINFO = 99;
+}
+
+
+message LoginQueueInfo {
+    bool allow = 1;
+    uint32 queuePosition = 2;
+    uint32 needWaitSecs = 3;
+    bool queueIsFull = 4;
+}
+
+message BlacklistInfoRes {
+    AccountBanReason banReason = 1;
+    uint32 expireDuration = 2;
+    uint32 banTime = 3;
+}
+
+enum AccountBanReason {
+    Unknown = 0;
+    InGameAuto = 1;
+    Refund = 2;
+    Others = 3;
+    Skinmod = 4;
+    InGameAutoNew = 1014;
+}

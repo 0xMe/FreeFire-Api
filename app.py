@@ -5,7 +5,7 @@ import time
 from datetime import datetime, timedelta
 from Utilities.until import load_accounts
 from Api.Account import get_garena_token, get_major_login
-from Api.InGame import get_player_personal_show, get_player_stats
+from Api.InGame import get_player_personal_show, get_player_stats, search_account_by_keyword
 
 
 accounts = load_accounts()
@@ -15,6 +15,49 @@ app = Flask(__name__)
 # Enable CORS for all origins on all routes
 CORS(app)
 
+
+
+
+@app.route('/get_search_account_by_keyword', methods=['GET'])
+def get_search_account_by_keyword():
+    try:
+        # Get request parameters
+        region = request.args.get('server', 'IND').upper()
+        search_term = request.args.get('keyword')
+        
+        # Validate keyword parameter
+        if not search_term:
+            return json.dumps({"error": "Keyword parameter is required"}, indent=2), 400, {'Content-Type': 'application/json; charset=utf-8'}
+        
+        # Enforce minimum keyword length
+        if len(search_term.strip()) < 3:
+            return json.dumps({"error": "Keyword must be at least 3 characters long"}, indent=2), 400, {'Content-Type': 'application/json; charset=utf-8'}
+        
+        # Validate server exists in accounts
+        if region not in accounts:
+            return json.dumps({"error": f"Invalid server: {region}"}, indent=2), 400, {'Content-Type': 'application/json; charset=utf-8'}
+        
+        # Authenticate with Garena
+        auth_response = get_garena_token(accounts[region]['uid'], accounts[region]['password'])
+        if not auth_response or 'access_token' not in auth_response:
+            return json.dumps({"error": "Authentication failed"}, indent=2), 401, {'Content-Type': 'application/json; charset=utf-8'}
+        
+        # Get major login credentials
+        login_response = get_major_login(auth_response["access_token"], auth_response["open_id"])
+        if not login_response or 'token' not in login_response:
+            return json.dumps({"error": "Major login failed"}, indent=2), 401, {'Content-Type': 'application/json; charset=utf-8'}
+        
+        # Search for accounts
+        search_results = search_account_by_keyword(login_response["serverUrl"], login_response["token"], search_term)
+        
+        # Return formatted response
+        formatted_response = json.dumps(search_results, indent=2, ensure_ascii=False)
+        return formatted_response, 200, {'Content-Type': 'application/json; charset=utf-8'}
+        
+    except KeyError as e:
+        return json.dumps({"error": f"Missing configuration: {str(e)}"}, indent=2), 500, {'Content-Type': 'application/json; charset=utf-8'}
+    except Exception as e:
+        return json.dumps({"error": f"Internal server error: {str(e)}"}, indent=2), 500, {'Content-Type': 'application/json; charset=utf-8'}
 
 @app.route('/get_player_stats', methods=['GET'])
 def get_player_stat():
@@ -168,8 +211,6 @@ def get_player_stat():
             "message": "An unexpected error occurred while processing your request"
         }), 500
 
-
-
 @app.route('/get_player_personal_show', methods=['GET'])
 def get_account_info():
     try:
@@ -300,7 +341,7 @@ def get_account_info():
             need_gallery_info, 
             call_sign_src_int
         )
-        
+
         if not player_personal_show_result:
             response = {
                 "status": "error",

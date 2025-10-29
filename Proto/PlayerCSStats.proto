@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package PlayerCSStats;
+
+message request {
+  uint64 accountid = 1;
+  uint32 seasonid = 2;
+  uint32 gamemode = 3;
+  uint32 matchmode = 4;
+}
+
+message response {
+  AccountInfoWithTCStats csstats = 1;
+}
+
+message AccountInfoWithTCStats {
+  uint64 accountid = 1;
+  uint32 gamesplayed = 2;
+  uint32 wins = 3;
+  uint32 kills = 4;
+  DetailedTCStats detailedstats = 5;
+}
+
+message DetailedTCStats {
+  uint32 mvpcount = 1;
+  uint32 doublekills = 2;
+  uint32 triplekills = 3;
+  uint32 fourkills = 4;
+  uint32 damage = 5;
+  uint32 headshotkills = 6;
+  uint32 knockdowns = 7;
+  uint32 revivals = 8;
+  uint32 assists = 9;
+  uint32 deaths = 10;
+  uint32 streakwins = 11;
+  uint32 throwingkills = 12;
+  uint32 onegamemostdamage = 13;
+  uint32 onegamemostkills = 14;
+  double ratingpoints = 15;
+  uint32 ratingenabledgames = 16;
+  uint32 headshotcount = 17;
+  uint32 hitcount = 18;
+}

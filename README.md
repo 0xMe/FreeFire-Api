@@ -67,6 +67,17 @@ Query Parameters:
 Example:
     https://freefire-api-six.vercel.app/get_player_personal_show?server=ind&uid=1633864660
 
+#### Search Account By Keyword
+
+`GET /get_search_account_by_keyword`
+
+Query Parameters:
+- `server` (default: "IND") — The server region.
+- `keyword` — The Keyword.
+
+Example:
+    https://freefire-api-six.vercel.app/get_search_account_by_keyword?server=ind&keyword=Hello
+
 ### API Responses
 
 Responses are in JSON format. Example error messages are provided for invalid parameters, authentication failures, and data not found.

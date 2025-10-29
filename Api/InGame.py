@@ -2,12 +2,84 @@ import requests
 import Proto.compiled.PlayerPersonalShow_pb2
 import Proto.compiled.PlayerStats_pb2
 import Proto.compiled.PlayerCSStats_pb2
+import Proto.compiled.SearchAccountByName_pb2
 from Utilities.until import encode_protobuf, decode_protobuf
 import json
 from Configuration.APIConfiguration import RELEASEVERSION
 
 
 
+def search_account_by_keyword(server_url, auth_token, keyword):
+    """
+    Perform a fuzzy account search by keyword.
+
+    Args:
+        server_url (str): Base URL of the API server.
+        auth_token (str): Bearer token used for authentication.
+        keyword (str): Search term to match player names.
+
+    Returns:
+        dict: Parsed JSON response containing matching accounts.
+
+    Raises:
+        ConnectionError: If network connection fails or times out.
+        ValueError: If protobuf encoding or decoding fails.
+        RuntimeError: For invalid or empty API responses.
+    """
+    try:
+        # --- Endpoint & Payload ---
+        endpoint = f"{server_url}/FuzzySearchAccountByName"
+        try:
+            payload = encode_protobuf(
+                {"keyword": str(keyword)},
+                Proto.compiled.SearchAccountByName_pb2.request()
+            )
+        except Exception as e:
+            raise ValueError(f"Failed to encode protobuf payload: {e}")
+
+        # --- Request Headers ---
+        headers = {
+            "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 13; A063 Build/TKQ1.221220.001)",
+            "Connection": "Keep-Alive",
+            "Accept-Encoding": "gzip",
+            "Expect": "100-continue",
+            "Authorization": f"Bearer {auth_token}",
+            "X-Unity-Version": "2018.4.11f1",
+            "X-GA": "v1 1",
+            "ReleaseVersion": RELEASEVERSION,
+            "Content-Type": "application/x-www-form-urlencoded",
+        }
+
+        # --- Execute Request ---
+        try:
+            response = requests.post(endpoint, data=payload, headers=headers, timeout=15)
+            response.raise_for_status()
+        except requests.exceptions.Timeout:
+            raise ConnectionError("Request timed out while contacting server.")
+        except requests.exceptions.ConnectionError:
+            raise ConnectionError("Failed to connect to the server.")
+        except requests.exceptions.HTTPError as e:
+            raise RuntimeError(f"HTTP error {response.status_code}: {e}")
+        except requests.exceptions.RequestException as e:
+            raise ConnectionError(f"Request error: {e}")
+
+        if not response.content:
+            raise RuntimeError("Empty response received from server.")
+
+        # --- Decode Response ---
+        try:
+            decoded = decode_protobuf(
+                response.content,
+                Proto.compiled.SearchAccountByName_pb2.response
+            )
+        except Exception as e:
+            raise ValueError(f"Failed to decode protobuf response: {e}")
+
+        return json.loads(json.dumps(decoded, default=str))
+
+    except Exception as e:
+        # Catch any unexpected runtime issues
+        raise RuntimeError(f"Unhandled error in search_account_by_keyword: {e}")
 
 def get_player_personal_show(serverurl, authorization, account_id, need_gallery_info=False, call_sign_src=7):
     """

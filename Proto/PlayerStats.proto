@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package PlayerStats;
+
+message request {
+  uint64 accountid = 1;
+  uint32 matchmode = 2;
+}
+
+message response {
+  AccountInfoWithStatsToClient solostats = 1;
+  AccountInfoWithStatsToClient duostats = 2;
+  AccountInfoWithStatsToClient quadstats = 3;
+}
+
+message AccountInfoWithStatsToClient {
+  uint64 accountid = 1;
+  uint32 gamesplayed = 2;
+  uint32 wins = 3;
+  uint32 kills = 4;
+  PlayerDetailedStats detailedstats = 5;
+}
+
+message PlayerDetailedStats {
+  uint32 deaths = 1;
+  uint32 top10times = 2;
+  uint32 topntimes = 3;
+  uint32 distancetravelled = 4;
+  uint32 survivaltime = 5;
+  uint32 revives = 6;
+  uint32 highestkills = 7;
+  uint32 damage = 8;
+  uint32 roadkills = 9;
+  uint32 headshots = 10;
+  uint32 headshotkills = 11;
+  uint32 knockdown = 12;
+  uint32 pickups = 13;
+}
