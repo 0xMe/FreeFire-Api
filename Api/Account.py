@@ -2,7 +2,7 @@ import requests
 import Proto.compiled.MajorLogin_pb2
 from Utilities.until import encode_protobuf, decode_protobuf
 import json
-from Configuration.APIConfiguration import RELEASEVERSION
+from Configuration.APIConfiguration import RELEASEVERSION, DEBUG
 
 
 def get_garena_token(uid, password):
@@ -36,6 +36,8 @@ def get_garena_token(uid, password):
     try:
         response = requests.post(url, data=payload, headers=headers)
         response.raise_for_status()
+        if DEBUG:
+            print("[I] RES:", response.content, "\n")
         return response.json()
     except requests.exceptions.RequestException as e:
         print(f"Error making request: {e}")
@@ -83,6 +85,8 @@ def get_major_login(logintoken, openid):
 
     # Make the request
     response = requests.post(url, data=encrypted_payload, headers=headers)
+    if DEBUG:
+        print("[I] RES:", response.content, "\n")
     try:
         # Decode and return the response as JSON
         message = decode_protobuf(response.content, Proto.compiled.MajorLogin_pb2.response)

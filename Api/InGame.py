@@ -5,7 +5,7 @@ import Proto.compiled.PlayerCSStats_pb2
 import Proto.compiled.SearchAccountByName_pb2
 from Utilities.until import encode_protobuf, decode_protobuf
 import json
-from Configuration.APIConfiguration import RELEASEVERSION
+from Configuration.APIConfiguration import RELEASEVERSION, DEBUG
 
 
 
@@ -54,6 +54,8 @@ def search_account_by_keyword(server_url, auth_token, keyword):
         try:
             response = requests.post(endpoint, data=payload, headers=headers, timeout=15)
             response.raise_for_status()
+            if DEBUG:
+                print("[I] RES:", response.content, "\n")
         except requests.exceptions.Timeout:
             raise ConnectionError("Request timed out while contacting server.")
         except requests.exceptions.ConnectionError:
@@ -116,6 +118,8 @@ def get_player_personal_show(serverurl, authorization, account_id, need_gallery_
     }
     
     response = requests.post(url, data=encrypted_payload, headers=headers)
+    if DEBUG:
+        print("[I] RES:", response.content, "\n")
     try:
         response.raise_for_status()  # Raise an exception for bad status codes
         
@@ -224,6 +228,8 @@ def get_player_stats(authorization, serverurl, mode, uid, match_type="CAREER"):
         try:
             response = requests.post(url, data=encrypted_payload, headers=headers, timeout=30)
             response.raise_for_status()  # Raises HTTPError for bad status codes
+            if DEBUG:
+                print("[I] RES:", response.content, "\n")
         except requests.exceptions.Timeout:
             raise ConnectionError("Request timed out after 30 seconds")
         except requests.exceptions.ConnectionError:
