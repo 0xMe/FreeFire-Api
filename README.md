@@ -99,6 +99,10 @@ Responses are in JSON format. Example error messages are provided for invalid pa
 
 Refer to `requirements.txt` for additional dependencies.
 
+## Deployment
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2F0xMe%2FFreeFire-Api)
+
 ## Contributing
 
 Feel free to fork and submit pull requests. Open issues for bug reports and feature requests.
