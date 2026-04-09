@@ -122,22 +122,22 @@ def get_player_personal_show(serverurl, authorization, account_id, need_gallery_
     response = requests.post(url, data=encrypted_payload, headers=headers)
     if DEBUG:
         print("[GetPlayerPersonalShow] Response(raw):", response.content, "\n")
-    # try:
-    response.raise_for_status()  # Raise an exception for bad status codes
-    
-    # Decode protobuf response
-    message = decode_protobuf(response.content, Proto.compiled.PlayerPersonalShow_pb2.response)
-    
-    # Convert to JSON
-    json_data = json.loads(json.dumps(message, default=str))
-    return json_data
+    try:
+        response.raise_for_status()  # Raise an exception for bad status codes
         
-    # except requests.exceptions.RequestException as e:
-        # print(f"Request failed: {response.text}")
-        # return None
-    # except Exception as e:
-        # print(f"Error processing response: {e}")
-        # return None
+        # Decode protobuf response
+        message = decode_protobuf(response.content, Proto.compiled.PlayerPersonalShow_pb2.response)
+        
+        # Convert to JSON
+        json_data = json.loads(json.dumps(message, default=str))
+        return json_data
+        
+    except requests.exceptions.RequestException as e:
+        print(f"Request failed: {response.text}")
+        return None
+    except Exception as e:
+        print(f"Error processing response: {e}")
+        return None
 
 
 def get_player_stats(authorization, serverurl, mode, uid, match_type="CAREER"):
