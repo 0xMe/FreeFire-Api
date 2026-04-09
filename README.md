@@ -89,6 +89,7 @@ Responses are in JSON format. Example error messages are provided for invalid pa
 - `Api/InGame.py` — Game data retrieval functions.
 - `Utilities/until.py` — Utility functions for encryption and protocol buffer handling.
 - `Configuration/` — Contains configuration files, including AES keys and API version.
+- `Additional/GenerateAccounts.py` — Automatically Generate `AccountConfiguration.json` (Account Generate).
 
 ## Requirements
 
