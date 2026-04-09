@@ -3,53 +3,60 @@ syntax = "proto3";
 package PlayerPersonalShow;
 
 enum CallSignSrcType {
-    None = 0;
-    Without = 1;
-    SearchChampionship = 2;
-    SearchCup = 3;
-    SearchFriend = 4;
-    SearchChummy = 5;
-    GameOver = 6;
-    PersonalShowView = 7;
-    PersonalShowEp = 8;
-    PersonalShowOwner = 9;
-    BriefInfo = 10;
-    FriendRecall = 11;
-    FriendPlatform = 12;
-    FriendRequest = 13;
-    FriendList = 14;
-    FriendNtf = 15;
-    FriendRecommend = 16;
-    FriendCdt = 17;
-    ClanRequest = 18;
-    ClanMembers = 19;
-    CupRequest = 20;
-    CupMembers = 21;
-    ChampionshipRequest = 22;
-    ChampionshipMembers = 23;
-    ChampionshipSeason = 24;
-    ChummyRequest = 25;
-    ChummyList = 26;
-    ChummyRecommendStudent = 27;
-    ChummyRecommendMentor = 28;
-    LeaderboardProfile = 29;
-    PoolLeaderboardProfile = 30;
-    RecentVisitors = 31;
-    LobbyPopupWindow = 32;
-    MatchmakingBlacklist = 33;
-    MatchmakingSocial = 34;
-    MatchSpectation = 35;
-    SocialTeamUpRecommend = 36;
-    ClanInviteStrangers = 37;
-    SendGiftNotify = 38;
+    CallSignSrc_NONE = 0;
+    CallSignSrc_WITHOUT = 1;
+    CallSignSrc_SEARCH_CHAMPIONSHIP = 2;
+    CallSignSrc_SEARCH_CUP = 3;
+    CallSignSrc_SEARCH_FRIEND = 4;
+    CallSignSrc_SEARCH_CHUMMY = 5;
+    CallSignSrc_GAME_OVER = 6;
+    CallSignSrc_PERSONAL_SHOW_VIEW = 7;
+    CallSignSrc_PERSONAL_SHOW_EP = 8;
+    CallSignSrc_PERSONAL_SHOW_OWNER = 9;
+    CallSignSrc_BREIF_INFO = 10;
+    CallSignSrc_FRIEND_RECALL = 11;
+    CallSignSrc_FRIEND_PLATFORM = 12;
+    CallSignSrc_FRIEND_REQUEST = 13;
+    CallSignSrc_FRIEND_LIST = 14;
+    CallSignSrc_FRIEND_NTF = 15;
+    CallSignSrc_FRIEND_RECOMMEND = 16;
+    CallSignSrc_FRIEND_CDT = 17;
+    CallSignSrc_CLAN_REQUEST = 18;
+    CallSignSrc_CLAN_MEMBERS = 19;
+    CallSignSrc_CUP_REQUEST = 20;
+    CallSignSrc_CUP_MEMBERS = 21;
+    CallSignSrc_CHAMPIONSHIP_REQUEST = 22;
+    CallSignSrc_CHAMPIONSHIP_MEMBERS = 23;
+    CallSignSrc_CHAMPIONSHIP_SEASON = 24;
+    CallSignSrc_CHUMMY_REQUEST = 25;
+    CallSignSrc_CHUMMY_LIST = 26;
+    CallSignSrc_CHUMMY_RECOMMEND_STUDENT = 27;
+    CallSignSrc_CHUMMY_RECOMMEND_MENTOR = 28;
+    CallSignSrc_LEADERBOARD_PROFILE = 29;
+    CallSignSrc_POOLLEADERBOARD_PROFILE = 30;
+    CallSignSrc_RECENT_VISITORS = 31;
+    CallSignSrc_LOBBY_POPUP_WINDOW = 32;
+    CallSignSrc_MATCHMAKING_BLACKLIST = 33;
+    CallSignSrc_MATCHMAKING_SOCIAL = 34;
+    CallSignSrc_MATCH_SPECTATION = 35;
+    CallSignSrc_SOCIAL_TEAM_UP_RECOMMEND = 36;
+    CallSignSrc_CLAN_INVITE_STRANGERS = 37;
+    CallSignSrc_SEND_GIFT_NOTIFY = 38;
+    CallSignSrc_PLAYER_NEARBY = 39;
+    CallSignSrc_FRESH_PLAYER_RECOMMEND = 40;
 }
+
 
 message request {
     uint64 accountId = 1;
     CallSignSrcType callSignSrc = 2;
-    bool needGalleryInfo = 3;
+    optional bool needGalleryInfo = 3;
+    optional bool needBlacklist = 4;
+    optional bool needSparkInfo = 5;
 }
 
+	
+	
 enum EAttendanceVeteranLeaveDays {
     VETERANLEAVEDAYSNONE = 0;
     VETERANLEAVEDAYSSHORT = 1;
@@ -272,7 +279,11 @@ message response {
     EAttendancePreVeteranActionType preveterantype = 12;
     repeated AccountMMRInfo mmrlist = 13;
     ModeStatsSummaryInfo modestatssummaryinfo = 14;
+    SparkInfo user_spark_info = 15;
+    SparkInfo collab_spark_info = 16;
+    repeated AccountCollectionCustomItemInfo collection_custom_list = 17;
 }
+
 
 message AccountInfoBasic {
     uint64 accountid = 1;
@@ -353,7 +364,36 @@ message AccountInfoBasic {
     bool displaycspeakpoint = 76;
     uint32 cspeaktournamentrankpos = 77;
     uint32 avatarframe = 78;
+	BlacklistRes blacklist = 79;
+    WorkshopAccountSummaryInfo workshop_summary_info = 80;
+    AccountBasicSparkInfo spark_info = 81;
+    SocialBasicInfo social_basic_info = 82;
+	
 }
+
+message AccountBasicSparkInfo {
+    bool claimed = 1;
+    SparkInfo user_spark_info = 2;
+}
+
+message WorkshopAccountSummaryInfo {
+    uint64 account_id = 1;
+    uint32 exp = 2;
+}
+
+
+message BlacklistRes {
+    uint64 account_id = 1;
+    string device_id = 2;
+    uint32 ban_reason = 3;
+    uint32 ban_time = 4;
+    string ban_reason_detail = 5;
+    bool is_in_blacklist = 6;
+    uint32 ban_expire_duration = 7;
+    string ban_type = 8;
+}
+
+
 
 message AccountPrefers {
     bool hidemylobby = 1;
@@ -362,6 +402,7 @@ message AccountPrefers {
     bool hidepersonalinfo = 4;
     bool disablefriendspectate = 5;
     bool hideoccupation = 6;
+    repeated uint32 cs_peak_pregame_show_choices = 7;
 }
 
 message ExternalIconInfo {
@@ -624,4 +665,35 @@ message AccountMMRInfo {
 message ModeStatsSummaryInfo {
     uint32 reachedheroiccnt = 1;
     uint32 maxscore = 2;
+}
+
+
+enum SparkState {
+    SparkState_NONE = 0;
+    SparkState_ACTIVE = 1;
+    SparkState_DORMANT = 2;
+    SparkState_EXTINGUISHED = 3;
+}
+
+message SparkStageAppearance {
+    uint32 stage_id = 1;
+    repeated uint32 appearance_item_ids = 2;
+}
+
+message SparkInfo {
+    SparkState state = 1;
+    uint32 level = 2;
+    uint64 exp = 3;
+    uint32 login_streak_days = 4;
+    uint32 temper = 5;
+    repeated uint32 appearance_item_ids = 6;
+    uint32 dormant_recover_progress = 7;
+    uint32 extinguished_recover_progress = 8;
+    uint32 appearance_stage = 9;
+    repeated SparkStageAppearance stage_appearance_items = 10;
+}
+
+message AccountCollectionCustomItemInfo {
+    uint32 item_id = 1;
+    string custom_info = 2;
 }

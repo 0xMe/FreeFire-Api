@@ -22,17 +22,21 @@ message AccountInfoWithStatsToClient {
 }
 
 message PlayerDetailedStats {
-  uint32 deaths = 1;
-  uint32 top10times = 2;
-  uint32 topntimes = 3;
-  uint32 distancetravelled = 4;
-  uint32 survivaltime = 5;
-  uint32 revives = 6;
-  uint32 highestkills = 7;
-  uint32 damage = 8;
-  uint32 roadkills = 9;
-  uint32 headshots = 10;
-  uint32 headshotkills = 11;
-  uint32 knockdown = 12;
-  uint32 pickups = 13;
+    uint32 deaths = 1;
+    uint32 top10_times = 2;
+    uint32 top_n_times = 3;
+    uint32 distance_travelled = 4;
+    uint32 survival_time = 5;
+    uint32 revives = 6;
+    uint32 highest_kills = 7;
+    uint32 damage = 8;
+    uint32 road_kills = 9;
+    uint32 headshots = 10;
+    uint32 headshot_kills = 11;
+    uint32 knock_down = 12;
+    uint32 pick_ups = 13;
+    double rating_points = 14;
+    uint32 rating_enabled_games = 15;
+    uint32 gold_medal_cnt = 16;
+    uint32 silver_medal_cnt = 17;
 }

@@ -83,7 +83,7 @@ def search_account_by_keyword(server_url, auth_token, keyword):
         # Catch any unexpected runtime issues
         raise RuntimeError(f"Unhandled error in search_account_by_keyword: {e}")
 
-def get_player_personal_show(serverurl, authorization, account_id, need_gallery_info=False, call_sign_src=7):
+def get_player_personal_show(serverurl, authorization, account_id, need_gallery_info=False, call_sign_src=7, need_blacklist=False, need_spark_info=False):
     """
     Get player personal show data
     
@@ -102,6 +102,8 @@ def get_player_personal_show(serverurl, authorization, account_id, need_gallery_
         "accountId": account_id,
         "callSignSrc": call_sign_src,
         "needGalleryInfo": need_gallery_info,
+        "needBlacklist": need_blacklist,
+        "needSparkInfo": need_spark_info,
     }, Proto.compiled.PlayerPersonalShow_pb2.request())
 
     headers = {

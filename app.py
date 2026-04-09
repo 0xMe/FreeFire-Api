@@ -218,6 +218,8 @@ def get_account_info():
         server = request.args.get('server', 'IND').upper()
         uid = request.args.get('uid')
         need_gallery_info = request.args.get('need_gallery_info', False)
+        need_blacklist = request.args.get('need_blacklist', False)
+        need_spark_info = request.args.get('need_spark_info', False)
         call_sign_src = request.args.get('call_sign_src', 7)
         
         # Validate UID parameter - must be integer
@@ -281,6 +283,50 @@ def get_account_info():
             }
             return jsonify(response), 400, {'Content-Type': 'application/json; charset=utf-8'}
         
+        
+        # Validate need_blacklist parameter
+        try:
+            if isinstance(need_blacklist, str):
+                if need_blacklist.lower() in ['true', '1', 'yes']:
+                    need_blacklist = True
+                elif need_blacklist.lower() in ['false', '0', 'no']:
+                    need_blacklist = False
+                else:
+                    raise ValueError("Invalid boolean value")
+            need_blacklist = bool(need_blacklist)
+        except (ValueError, TypeError):
+            response = {
+                "status": "error",
+                "error": "Invalid Parameter",
+                "message": "need_blacklist must be a boolean value (true/false, 1/0).",
+                "code": "INVALID_GALLERY_PARAM"
+            }
+            return jsonify(response), 400, {'Content-Type': 'application/json; charset=utf-8'}
+        
+        
+        # Validate need_spark_info parameter
+        try:
+            if isinstance(need_spark_info, str):
+                if need_spark_info.lower() in ['true', '1', 'yes']:
+                    need_spark_info = True
+                elif need_spark_info.lower() in ['false', '0', 'no']:
+                    need_spark_info = False
+                else:
+                    raise ValueError("Invalid boolean value")
+            need_spark_info = bool(need_spark_info)
+        except (ValueError, TypeError):
+            response = {
+                "status": "error",
+                "error": "Invalid Parameter",
+                "message": "need_spark_info must be a boolean value (true/false, 1/0).",
+                "code": "INVALID_GALLERY_PARAM"
+            }
+            return jsonify(response), 400, {'Content-Type': 'application/json; charset=utf-8'}
+        
+        
+        
+        
+        
         # Validate call_sign_src parameter
         try:
             call_sign_src_int = int(call_sign_src)
@@ -339,7 +385,9 @@ def get_account_info():
             major_login_result["token"], 
             uid_int, 
             need_gallery_info, 
-            call_sign_src_int
+            call_sign_src_int,
+            need_blacklist, 
+            need_spark_info
         )
         
         

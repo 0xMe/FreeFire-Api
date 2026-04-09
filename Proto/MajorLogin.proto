@@ -121,8 +121,18 @@ message response {
     bytes ak = 19;
     bytes aiv = 20;
     string ffantiUrl = 21;
+    //FFAntiConfigDesc ff_anti_config_desc = 22;
 }
 
+message FFAntiConfigDesc {
+    string region = 1;
+    bool enable = 2;
+    bool hpe_enable = 3;
+    bool ffi_enable = 4;
+    bool mtp_lite_data_enable = 5;
+    bool ffm_enable = 6;
+    bool ffo_enable = 7;
+}
 
 enum AccountDownloadType {
     AccountDownloadTypeNONE = 0;

@@ -22,22 +22,24 @@ message AccountInfoWithTCStats {
 }
 
 message DetailedTCStats {
-  uint32 mvpcount = 1;
-  uint32 doublekills = 2;
-  uint32 triplekills = 3;
-  uint32 fourkills = 4;
-  uint32 damage = 5;
-  uint32 headshotkills = 6;
-  uint32 knockdowns = 7;
-  uint32 revivals = 8;
-  uint32 assists = 9;
-  uint32 deaths = 10;
-  uint32 streakwins = 11;
-  uint32 throwingkills = 12;
-  uint32 onegamemostdamage = 13;
-  uint32 onegamemostkills = 14;
-  double ratingpoints = 15;
-  uint32 ratingenabledgames = 16;
-  uint32 headshotcount = 17;
-  uint32 hitcount = 18;
+    uint32 mvp_count = 1;
+    uint32 double_kills = 2;
+    uint32 triple_kills = 3;
+    uint32 four_kills = 4;
+    uint32 damage = 5;
+    uint32 head_shot_kills = 6;
+    uint32 knock_downs = 7;
+    uint32 revivals = 8;
+    uint32 assists = 9;
+    uint32 deaths = 10;
+    uint32 streak_wins = 11;
+    uint32 throwing_kills = 12;
+    uint32 one_game_most_damage = 13;
+    uint32 one_game_most_kills = 14;
+    double rating_points = 15;
+    uint32 rating_enabled_games = 16;
+    uint32 headshot_count = 17;
+    uint32 hit_count = 18;
+    uint32 gold_medal_cnt = 19;
+    uint32 silver_medal_cnt = 20;
 }
