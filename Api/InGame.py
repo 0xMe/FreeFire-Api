@@ -105,37 +105,40 @@ def get_player_personal_show(serverurl, authorization, account_id, need_gallery_
     }, Proto.compiled.PlayerPersonalShow_pb2.request())
 
     headers = {
-        'User-Agent': "Dalvik/2.1.0 (Linux; U; Android 13; A063 Build/TKQ1.221220.001)",
-        'Connection': "Keep-Alive",
-        'Accept-Encoding': "gzip",
-        'Content-Type': "application/octet-stream",
-        'Expect': "100-continue",
-        'Authorization': f"Bearer {authorization}",
-        'X-Unity-Version': "2018.4.11f1",
-        'X-GA': "v1 1",
-        'ReleaseVersion': RELEASEVERSION,
-        'Content-Type': "application/x-www-form-urlencoded"
+      "Host": "client.ind.freefiremobile.com",
+      "User-Agent": "UnityPlayer/2022.3.47f1 (UnityWebRequest/1.0, libcurl/8.5.0-DEV)",
+      "Accept": "*/*",
+      "Accept-Encoding": "deflate, gzip",
+      "Authorization": f"Bearer {authorization}",
+      "X-GA": "v1 1",
+      "ReleaseVersion": RELEASEVERSION,
+      "Content-Type": "application/x-www-form-urlencoded",
+      "X-Unity-Version": "2022.3.47f1",
+      "Content-Length": "16"
     }
+    
+    
     
     response = requests.post(url, data=encrypted_payload, headers=headers)
     if DEBUG:
-        print("[I] RES:", response.content, "\n")
-    try:
-        response.raise_for_status()  # Raise an exception for bad status codes
+        print("[GetPlayerPersonalShow] Response(raw):", response.content, "\n")
+    # try:
+    response.raise_for_status()  # Raise an exception for bad status codes
+    
+    # Decode protobuf response
+    message = decode_protobuf(response.content, Proto.compiled.PlayerPersonalShow_pb2.response)
+    
+    # Convert to JSON
+    json_data = json.loads(json.dumps(message, default=str))
+    return json_data
         
-        # Decode protobuf response
-        message = decode_protobuf(response.content, Proto.compiled.PlayerPersonalShow_pb2.response)
-        
-        # Convert to JSON
-        json_data = json.loads(json.dumps(message, default=str))
-        return json_data
-        
-    except requests.exceptions.RequestException as e:
-        print(f"Request failed: {response.text}")
-        return None
-    except Exception as e:
-        print(f"Error processing response: {e}")
-        return None
+    # except requests.exceptions.RequestException as e:
+        # print(f"Request failed: {response.text}")
+        # return None
+    # except Exception as e:
+        # print(f"Error processing response: {e}")
+        # return None
+
 
 def get_player_stats(authorization, serverurl, mode, uid, match_type="CAREER"):
     """

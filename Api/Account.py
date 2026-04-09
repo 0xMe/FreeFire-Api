@@ -37,7 +37,7 @@ def get_garena_token(uid, password):
         response = requests.post(url, data=payload, headers=headers)
         response.raise_for_status()
         if DEBUG:
-            print("[I] RES:", response.content, "\n")
+            print("[oauth/guest/token/grant] Response(raw):", response.content, "\n")
         return response.json()
     except requests.exceptions.RequestException as e:
         print(f"Error making request: {e}")
@@ -67,7 +67,8 @@ def get_major_login(logintoken, openid):
     }, Proto.compiled.MajorLogin_pb2.request())
 
     # API endpoint
-    url = "https://loginbp.ggblueshark.com/MajorLogin"
+    # url = "https://loginbp.ggblueshark.com/MajorLogin"
+    url = "https://loginbp.ggpolarbear.com/MajorLogin"
 
     # Headers
     headers = {
@@ -86,11 +87,11 @@ def get_major_login(logintoken, openid):
     # Make the request
     response = requests.post(url, data=encrypted_payload, headers=headers)
     if DEBUG:
-        print("[I] RES:", response.content, "\n")
+        print("[MajorLogin] Response(raw):", response.content, "\n")
     try:
         # Decode and return the response as JSON
         message = decode_protobuf(response.content, Proto.compiled.MajorLogin_pb2.response)
         return message
     except:
-        print("[e] get_major_login() - ", response.text)
+        print("[MajorLogin] Error:", response.text)
     return False

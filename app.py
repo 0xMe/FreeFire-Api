@@ -341,7 +341,9 @@ def get_account_info():
             need_gallery_info, 
             call_sign_src_int
         )
-
+        
+        
+        
         if not player_personal_show_result:
             response = {
                 "status": "error",

@@ -1,2 +1,2 @@
 RELEASEVERSION = "OB53"
-DEBUG = False
+DEBUG = True
